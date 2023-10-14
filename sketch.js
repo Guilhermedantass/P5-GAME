@@ -18,6 +18,7 @@ function loadImages() {
     score = loadImage('images/score.svg');
     options = loadImage('images/options.svg');
     about = loadImage('images/about.svg');
+    guilherme = loadImage('images/guilherme.jpeg');
 }
 
 function loadSounds() {
@@ -32,12 +33,11 @@ function setup() {
 
 }
 
-
-
 function draw() {
     image(bg, 0, 0);
     image(nuvem, move, 0);
     moveNuvem()
+    console.log(submenu);
 
     if (tela === "menu") {
         hero.x = -100
@@ -56,8 +56,31 @@ function draw() {
             image(options, 500, 310);
             image(about, 500, 370);
 
-        } else if (submenu == "about") {
+        }
+        if (submenu == "options") {
+            let mensagem = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+            in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+            mollit anim id est laborum.`
 
+            textSize(32);
+            fill(0, 0, 0);
+            text('INSTRUÇÕES', 500, 180, 50, 1000);
+            textSize(14);
+            text(mensagem, 480, 230, 270);
+
+        }
+        if (submenu == "about") {
+            textSize(30);
+            fill(0, 0, 0);
+            text('Colaboradores', 500, 190, );
+            image(guilherme, 550, 250, 106, 98)
+            textSize(20);
+            fill(0, 0, 0);
+            text('Elison Guilherme', 530, 370, );
+            textSize(16);
+            fill(0, 0, 0);
+            text('Desenvolvedor', 550, 380, 50, 100);
         }
 
         text(mouseX + ' ' + mouseY, 20, 20)
@@ -106,14 +129,18 @@ function mousePressed() {
                 noCursor();
                 hero.x = 100
                 hero.y = 465
-                tela = 'jogar';
+                tela = 'jogar'
                 break;
-
             case (mouseX >= 1145 && mouseX <= 1195 && mouseY >= 5 && mouseY <= 55):
                 mudarVolume();
                 break;
+            case (mouseX >= 508 && mouseX <= 692 && mouseY >= 310 && mouseY <= 350):
+                submenu = "options";
+                break;
             case (mouseX >= 508 && mouseX <= 692 && mouseY >= 370 && mouseY <= 410):
                 submenu = "about";
+                console.log("aqio")
+                break;
         }
     } else if (tela == 'jogar') {
         hero.changeAni('atk');
